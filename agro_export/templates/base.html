@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Agro Export{% endblock %}</title>
+
+    <style>
+        /* Estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        nav {
+            background-color: #006400;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links li a:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            margin-top: 60px;
+            min-height: calc(100vh - 120px);
+        }
+
+        footer {
+            background-color: #006400;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Estilos para el formulario de registro */
+        .registro-page {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            min-height: calc(100vh - 120px);
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registro-card {
+            max-width: 650px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .registro-header {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .registro-header h1 {
+            font-size: 2rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .registro-header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.95;
+            font-size: 1rem;
+        }
+
+        .registro-body {
+            padding: 2.5rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h2 {
+            color: #2e7d32;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-help {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .password-requirements {
+            background: #f5f5f5;
+            border-left: 4px solid #4caf50;
+            padding: 1rem 1.2rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .password-requirements strong {
+            display: block;
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+
+        .password-requirements ul {
+            margin: 0.5rem 0 0;
+            padding-left: 1.5rem;
+        }
+
+        .password-requirements li {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 0.4rem 0;
+            line-height: 1.5;
+        }
+
+        .btn-registro {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            margin-top: 1rem;
+        }
+
+        .btn-registro:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-registro:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .login-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .login-link a:hover {
+            color: #2e7d32;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: #f44336;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .registro-page {
+                padding: 20px 15px;
+            }
+
+            .registro-body {
+                padding: 1.5rem;
+            }
+
+            .registro-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .registro-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+/* === TÍTULOS DE SECCIÓN === */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 3rem 0 1.5rem 0;
+    text-align: center;
+    border-bottom: 3px solid #2e7d32;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+/* === SECCIONES GENERALES === */
+section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+}
+
+/* === INFO BÁSICA === */
+.info-basica .info-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.info-basica .info-text {
+    max-width: 450px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.info-basica .info-img img {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+/* === LOGROS === */
+.logros-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.logro-card {
+    background: white;
+    padding: 1.5rem;
+    width: 260px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+}
+
+.logro-icon {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+}
+
+/* === SOBRE NOSOTROS === */
+.sobre-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.sobre-text {
+    max-width: 450px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.sobre-img img {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+/* === TARJETAS DE PRODUCTOS Y NOTICIAS === */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+  .titulo-centro {
+    font-size: 2.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 3rem auto 0.5rem auto;
+    border-bottom: 3px solid #2e7d32;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+
+
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+{% load static %}
+
+{% block extra_js %}
+<script>
+function showTab(event, tabName) {
+    // Ocultar todos los contenidos
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Desactivar todas las pestañas
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Mostrar el contenido seleccionado
+    document.getElementById(tabName).classList.add('active');
+    
+    // Activar la pestaña clickeada
+    event.currentTarget.classList.add('active');
+}
+</script>
+{% endblock %}
+<body>
+    <nav>
+        <div class="logo">🌿 Agro Export</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            <li><a href="{% url 'productos' %}">Productos</a></li>
+            <li><a href="{% url 'normatividad' %}">Normatividad</a></li>
+           
+            <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+       
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Aquí se insertará el contenido de cada página -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Agro Export — Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

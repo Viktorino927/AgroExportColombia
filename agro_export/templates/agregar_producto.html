@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Producto - AgroExport{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #f5f7f5;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 4rem;
+        padding-bottom: 3rem;
+    }
+
+    .form-card {
+        width: 100%;
+        max-width: 650px;
+        background: #ffffff;
+        padding: 2.8rem;
+        border-radius: 18px;
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.12);
+        animation: fadeIn 0.6s ease;
+    }
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-title h2 {
+        font-size: 2rem;
+        color: #2e7d32;
+        font-weight: 700;
+    }
+
+    .form-title p {
+        color: #666;
+        margin-top: .3rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.4rem;
+    }
+
+    label {
+        font-weight: 600;
+        margin-bottom: .4rem;
+        display: block;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: .9rem;
+        border-radius: 10px;
+        border: 1.8px solid #d8d8d8;
+        font-size: 1rem;
+        transition: all .3s ease;
+        background: #fafafa;
+    }
+
+    .form-control:focus {
+        border-color: #4caf50;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(76,175,80,0.18);
+        outline: none;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.15rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform .3s ease, box-shadow .3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 15px rgba(46, 125, 50, 0.35);
+    }
+
+    .back-link {
+        text-align: center;
+        margin-top: 1.3rem;
+    }
+
+    .back-link a {
+        color: #2e7d32;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-card">
+
+        <div class="form-title">
+            <h2>🌱 Publicar Producto</h2>
+            <p>Ingresa la información del producto que deseas ofrecer</p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="tipo">Tipo de Producto</label>
+                <select id="tipo" name="tipo" class="form-control" required>
+                    <option value="">Seleccione una categoría...</option>
+                    <option value="cafe">Café</option>
+                    <option value="flores">Flores</option>
+                    <option value="aguacate">Aguacate</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre">Nombre del Producto</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required placeholder="Ej: Café especial">
+            </div>
+
+            <div class="form-group">
+                <label for="nombre_finca">Nombre de la Finca</label>
+                <input type="text" id="nombre_finca" name="nombre_finca" class="form-control" required placeholder="Ej: Finca Los Pinos">
+            </div>
+
+            <div class="form-group">
+                <label for="ubicacion">Ubicación</label>
+                <input type="text" id="ubicacion" name="ubicacion" class="form-control" required placeholder="Ej: Huila, Colombia">
+            </div>
+
+            <div class="form-group">
+                <label for="caracteristicas">Características</label>
+                <textarea id="caracteristicas" name="caracteristicas" rows="4" class="form-control" required placeholder="Describe tu producto..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" name="precio" class="form-control" required placeholder="Ej: 25000">
+            </div>
+
+            <div class="form-group">
+                <label for="unidad">Unidad</label>
+                <input type="text" id="unidad" name="unidad" class="form-control" required placeholder="Ej: kg, libra, bulto, docena...">
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen del Producto</label>
+                <input type="file" id="imagen" name="imagen" class="form-control" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn-submit">📦 Publicar Producto</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'productos' %}">⬅ Volver a Productos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

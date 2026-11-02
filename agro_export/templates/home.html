@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% block title %}Inicio | Agro Export{% endblock %}
+{% block extra_css %}
+<style>
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+/* === TÍTULOS DE SECCIÓN === */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 3rem 0 1.5rem 0;
+    text-align: center;
+    border-bottom: 3px solid #2e7d32;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+/* === SECCIONES GENERALES === */
+section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #4aec21ff;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+}
+
+/* === INFO BÁSICA === */
+.info-basica .info-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.info-basica .info-text {
+    max-width: 450px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.info-basica .info-img img {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+/* === LOGROS === */
+.logros-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.logro-card {
+    background: white;
+    padding: 1.5rem;
+    width: 260px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+}
+
+.logro-icon {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+}
+
+ SOBRE NOSOTROS 
+.sobre-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.sobre-text {
+    max-width: 450px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.sobre-img img {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+TARJETAS DE PRODUCTOS Y NOTICIAS 
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.titulo-centro {
+   font-size: 2rem;
+    font-weight: bold;
+    margin: 3rem 0 1.5rem 0;
+    text-align: center;
+    border-bottom: 3px solid #2e7d32;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.subtitulo-centro {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+    margin-top: 0.5rem;
+
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+  .titulo-container {
+    text-align: center; 
+    margin-top: 2rem;
+    
+    }
+</style>
+{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!-- ===================== HERO/BANNER ===================== -->
+<div class="banner">
+    <div class="titulo-container">
+        <h1 class="titulo-centro">AgroExport Colombia</h1>
+        <p class="subtitulo-centro">La plataforma  funciona como una herramienta estratégica para que los productores accedan de manera sencilla a información clave sobre estándares de calidad, requisitos de exportación y oportunidades comerciales. Al integrar filtros intuitivos y contenido actualizado, el sistema facilita la identificación de productos con potencial exportador y promueve la toma de decisiones informadas, contribuyendo así al fortalecimiento de las capacidades productivas y la articulación con mercados internacionales.</p>
+    </div>
+</div>
+
+
+
+<div class="container">
+
+    <!-- ===================== SECCIÓN DE INFORMACIÓN BÁSICA ===================== -->
+    <section class="info-basica">
+        <div class="info-content">
+            <div class="info-text">
+                <p>
+                    AgroExport Colombia conecta productores locales con mercados internacionales, 
+                    ofreciendo herramientas confiables para impulsar el crecimiento agrícola del país.
+                    Aquí podrás agregar imágenes, información, banners o contenido promocional según lo necesites.
+                </p>
+            </div>
+            <div class="info-img">
+              <img src="{% static '/img/caguacates-sonson9-7_42470191_20230527182558.webp' %}" alt="Imagen Informativa">
+            </div>
+        </div>
+    </section>
+
+
+   
+    <!-- ===================== PRODUCTOS DESTACADOS ===================== -->
+    <h2 class="section-title">Productos con Mejor Precio</h2>
+    <div class="cards-grid">
+        {% for producto in productos_destacados %}
+        <div class="card">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="card-img">
+            {% else %}
+                <div class="card-img"></div>
+            {% endif %}
+            <div class="card-content">
+                <h3>{{ producto.nombre }}</h3>
+                <p><strong>Finca:</strong> {{ producto.nombre_finca }}</p>
+                <p><strong>Ubicación:</strong> {{ producto.ubicacion }}</p>
+                <p><strong>Precio:</strong> ${{ producto.precio|floatformat:2 }} / {{ producto.unidad }}</p>
+                <p><strong>Contacto:</strong> {{ producto.productor.telefono }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay productos disponibles en este momento.</p>
+        {% endfor %}
+    </div>
+
+  
+
+
+    <!-- ===================== LOGROS ===================== -->
+    <section class="logros">
+        <h2 class="section-title">Nuestros Logros</h2>
+        <div class="logros-grid">
+
+            <div class="logro-card">
+                <div class="logro-icon">🌎</div>
+                <h3>+15 Países</h3>
+                <p>Exportando productos colombianos la UE.</p>
+            </div>
+
+            <div class="logro-card">
+                <div class="logro-icon">☕</div>
+                <h3>+5.000 Productores</h3>
+                <p>Apoyando a pequeños y medianos agricultores.</p>
+            </div>
+
+            <div class="logro-card">
+                <div class="logro-icon">📈</div>
+                <h3>Crecimiento Anual</h3>
+                <p>Incremento sostenido en exportación agrícola.</p>
+            </div>
+
+        </div>
+    </section>
+
+    
+  <!-- ===================== INFORMACIÓN DEL MERCADO ===================== -->
+    <h2 class="section-title">Información del Mercado</h2>
+        <div class="info-img">
+              <img src="{% static '/img/eco_aguacate_P5-1.webp' %}" alt="Imagen Informativa">
+            </div>
+    <div class="info-boxes">
+        <div class="info-box">
+           <!-- TRM del Día</h3> --> <h3>
+            {% if trm %}
+                <div class="value">${{ trm.valor|floatformat:2 }}</div>
+                <p>{{ trm.fecha }}</p>
+            {% else %}
+               <!--<p>No disponible</p>--> 
+            {% endif %}
+        </div>
+        
+        {% for precio in precios_mercado %}
+        <div class="info-box">
+            <h3>{{ precio.get_tipo_producto_display }}</h3>
+            <div class="value">${{ precio.precio_promedio|floatformat:2 }}</div>
+            <p>por {{ precio.unidad }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+    <!-- ===================== SOBRE NOSOTROS ===================== -->
+    <section class="sobre-nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+
+        <div class="sobre-content">
+            <div class="sobre-text">
+                <p>
+                    Somos una plataforma dedicada a conectar productores colombianos con compradores 
+                    internacionales, garantizando transparencia, seguridad y crecimiento para el sector 
+                    agrícola del país. Promovemos el comercio justo y la innovación en el campo.
+                </p>
+            </div>
+
+            <div class="sobre-img">
+                 <img src="{% static '/img/6837a9abe8adf.jpeg' %}" alt="Imagen Informativa">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===================== NOTICIAS ===================== -->
+    <h2 class="section-title">Noticias de Exportación</h2>
+    <div class="cards-grid">
+        {% for noticia in noticias %}
+        <div class="card">
+            {% if noticia.imagen %}
+                <img src="{{ noticia.imagen.url }}" alt="{{ noticia.titulo }}" class="card-img">
+            {% else %}
+                <div class="card-img"></div>
+            {% endif %}
+            <div class="card-content">
+                <h3>{{ noticia.titulo }}</h3>
+                <p>{{ noticia.resumen|truncatewords:30 }}</p>
+                <small>{{ noticia.fecha_publicacion|date:"d/m/Y" }}</small>
+                {% if noticia.url_externa %}
+                <br><a href="{{ noticia.url_externa }}" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Leer más</a>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay noticias disponibles en este momento.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

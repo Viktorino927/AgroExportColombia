@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block title %}Normatividad - AgroExport{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        color: white;
+        padding: 3rem 0;
+        margin-top: 70px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .normativa-section {
+        margin: 3rem 0;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .normativa-section h2 {
+        color: #2e7d32;
+        border-bottom: 3px solid #4caf50;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .normativa-item {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        border-left: 4px solid #4caf50;
+        background: #f9f9f9;
+    }
+
+    .normativa-item h3 {
+        color: #2e7d32;
+        margin-bottom: 1rem;
+    }
+
+    .normativa-item h4 {
+        color: #388e3c;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .normativa-item p {
+        line-height: 1.8;
+        color: #555;
+    }
+
+    .normativa-item ul {
+        margin-left: 2rem;
+        line-height: 1.8;
+    }
+
+    .tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .tab {
+        padding: 1rem 2rem;
+        background: #f5f5f5;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #666;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.3s;
+    }
+
+    .tab.active {
+        background: #4caf50;
+        color: white;
+    }
+
+    .tab:hover {
+        background: #66bb6a;
+        color: white;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block
+    }
+    
+.subtitulo-centro {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+    margin-top: 0.5rem;
+
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+  .titulo-container {
+    text-align: center;  
+    margin-top: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="titulo-container">
+    <h1 class="titulo-centro">Normatividad y Requisitos de Exportación</h1>
+    <p class="subtitulo-centro">En este lugar puedes encontra las distintas sertificaciones y normas que se deben de seguir y tener para poder exprotar productos como el café, flores y aguacate , ten en cuanta que estas normas solo funcionan en los mercado Europeos</p>
+</div>
+
+<div class="container">
+ <div class="tabs">
+    <button class="tab active" onclick="showTab(event, 'cafe')">☕ Café</button>
+    <button class="tab" onclick="showTab(event, 'flores')">🌺 Flores</button>
+    <button class="tab" onclick="showTab(event, 'aguacate')">🥑 Aguacate</button>
+</div>
+
+    <!-- Café -->
+    <div id="cafe" class="tab-content active">
+        <div class="normativa-section">
+            <h2>Requisitos de Exportación de Café a la Unión Europea</h2>
+            
+            {% if normativas_cafe %}
+                {% for normativa in normativas_cafe %}
+                <div class="normativa-item">
+                    <h3>{{ normativa.titulo }}</h3>
+                    <p>{{ normativa.descripcion }}</p>
+                    
+                    <h4>Requisitos:</h4>
+                    <p>{{ normativa.requisitos|linebreaks }}</p>
+                    
+                    <h4>Documentación Necesaria:</h4>
+                    <p>{{ normativa.documentacion|linebreaks }}</p>
+                    
+                    <small style="color: #888;">Última actualización: {{ normativa.fecha_actualizacion|date:"d/m/Y" }}</small>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="normativa-item">
+                    <h3>Requisitos Generales de Café</h3>
+                    <h4>Certificaciones Requeridas:</h4>
+                    <ul>
+                        <li>Certificado Fitosanitario</li>
+                        <li>Certificado de Origen</li>
+                        <li>Análisis de Laboratorio (residuos de plaguicidas)</li>
+                        <li>Cumplimiento de Reglamento (CE) No 178/2002</li>
+                    </ul>
+                    
+                    <h4>Normas de Calidad:</h4>
+                    <ul>
+                        <li>Contenido de humedad máximo: 12.5%</li>
+                        <li>Libre de defectos primarios</li>
+                        <li>Cumplimiento con límites máximos de residuos (LMR)</li>
+                        <li>Trazabilidad completa del producto</li>
+                    </ul>
+                    
+                    <h4>Documentación:</h4>
+                    <ul>
+                        <li>Factura Comercial</li>
+                        <li>Lista de Empaque</li>
+                        <li>Certificado de Análisis</li>
+                        <li>Documento de Transporte</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Flores -->
+    <div id="flores" class="tab-content">
+        <div class="normativa-section">
+            <h2>Requisitos de Exportación de Flores a la Unión Europea</h2>
+            
+            {% if normativas_flores %}
+                {% for normativa in normativas_flores %}
+                <div class="normativa-item">
+                    <h3>{{ normativa.titulo }}</h3>
+                    <p>{{ normativa.descripcion }}</p>
+                    
+                    <h4>Requisitos:</h4>
+                    <p>{{ normativa.requisitos|linebreaks }}</p>
+                    
+                    <h4>Documentación Necesaria:</h4>
+                    <p>{{ normativa.documentacion|linebreaks }}</p>
+                    
+                    <small style="color: #888;">Última actualización: {{ normativa.fecha_actualizacion|date:"d/m/Y" }}</small>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="normativa-item">
+                    <h3>Requisitos Generales de Flores</h3>
+                    <h4>Certificaciones Requeridas:</h4>
+                    <ul>
+                        <li>Certificado Fitosanitario Internacional</li>
+                        <li>Permiso de Importación CITES (especies protegidas)</li>
+                        <li>Cumplimiento de Directiva 2000/29/CE</li>
+                        <li>Certificación de Buenas Prácticas Agrícolas</li>
+                    </ul>
+                    
+                    <h4>Normas de Calidad:</h4>
+                    <ul>
+                        <li>Libre de plagas y enfermedades</li>
+                        <li>Cumplimiento con LMR de plaguicidas</li>
+                        <li>Normas de calidad según especie</li>
+                        <li>Cadena de frío completa</li>
+                    </ul>
+                    
+                    <h4>Documentación:</h4>
+                    <ul>
+                        <li>Factura Comercial</li>
+                        <li>Lista de Empaque Detallada</li>
+                        <li>Certificado Fitosanitario</li>
+                        <li>Documento de Transporte Aéreo (AWB)</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Aguacate -->
+    <div id="aguacate" class="tab-content">
+        <div class="normativa-section">
+            <h2>Requisitos de Exportación de Aguacate a la Unión Europea</h2>
+            
+            {% if normativas_aguacate %}
+                {% for normativa in normativas_aguacate %}
+                <div class="normativa-item">
+                    <h3>{{ normativa.titulo }}</h3>
+                    <p>{{ normativa.descripcion }}</p>
+                    
+                    <h4>Requisitos:</h4>
+                    <p>{{ normativa.requisitos|linebreaks }}</p>
+                    
+                    <h4>Documentación Necesaria:</h4>
+                    <p>{{ normativa.documentacion|linebreaks }}</p>
+                    
+                    <small style="color: #888;">Última actualización: {{ normativa.fecha_actualizacion|date:"d/m/Y" }}</small>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="normativa-item">
+                    <h3>Requisitos Generales de Aguacate</h3>
+                    <h4>Certificaciones Requeridas:</h4>
+                    <ul>
+                        <li>Certificado Fitosanitario</li>
+                        <li>Certificado de Origen</li>
+                        <li>Global GAP o equivalente</li>
+                        <li>Registro ICA de predios exportadores</li>
+                    </ul>
+                    
+                    <h4>Normas de Calidad:</h4>
+                    <ul>
+                        <li>Calibre y peso según destino</li>
+                        <li>Madurez fisiológica adecuada (21-22% materia seca)</li>
+                        <li>Libre de daños mecánicos y plagas</li>
+                        <li>Cumplimiento de Reglamento (CE) No 543/2011</li>
+                    </ul>
+                    
+                    <h4>Documentación:</h4>
+                    <ul>
+                        <li>Factura Comercial</li>
+                        <li>Lista de Empaque</li>
+                        <li>Certificado Fitosanitario</li>
+                        <li>Conocimiento de Embarque (B/L)</li>
+                        <li>Certificado de Análisis de Laboratorio</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function showTab(event, tabName) {
+    // Ocultar todos los contenidos
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Desactivar todas las pestañas
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Mostrar el contenido seleccionado
+    document.getElementById(tabName).classList.add('active');
+    
+    // Activar la pestaña clickeada
+    event.currentTarget.classList.add('active');
+}
+</script>
+{% endblock %}

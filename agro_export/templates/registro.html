@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+    /* Reset de estilos del body para esta página */
+    body {
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
+    }
+
+    .registro-container {
+        min-height: 100vh;
+        padding: 100px 20px 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .registro-card {
+        max-width: 650px;
+        width: 100%;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+
+    .registro-header {
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        color: white;
+        padding: 2.5rem;
+        text-align: center;
+    }
+
+    .registro-header h1 {
+        font-size: 2rem;
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .registro-header p {
+        margin: 0.5rem 0 0;
+        opacity: 0.95;
+        font-size: 1rem;
+    }
+
+    .registro-body {
+        padding: 2.5rem;
+    }
+
+    .form-section {
+        margin-bottom: 2.5rem;
+    }
+
+    .form-section h2 {
+        color: #2e7d32;
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e0e0e0;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="tel"],
+    .form-group textarea {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .form-help {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .password-requirements {
+        background: #f5f5f5;
+        border-left: 4px solid #4caf50;
+        padding: 1rem 1.2rem;
+        border-radius: 5px;
+        margin-top: 0.5rem;
+    }
+
+    .password-requirements strong {
+        display: block;
+        color: #2e7d32;
+        margin-bottom: 0.5rem;
+    }
+
+    .password-requirements ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.5rem;
+    }
+
+    .password-requirements li {
+        color: #666;
+        font-size: 0.85rem;
+        margin: 0.4rem 0;
+        line-height: 1.5;
+    }
+
+    .btn-registro {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        margin-top: 1rem;
+    }
+
+    .btn-registro:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-registro:active {
+        transform: translateY(0);
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e0e0e0;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .login-link a {
+        color: #4caf50;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .login-link a:hover {
+        color: #2e7d32;
+        text-decoration: underline;
+    }
+
+    .required-field::after {
+        content: " *";
+        color: #f44336;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .registro-container {
+            padding: 80px 15px 30px;
+        }
+
+        .registro-body {
+            padding: 1.5rem;
+        }
+
+        .registro-header {
+            padding: 2rem 1.5rem;
+        }
+
+        .registro-header h1 {
+            font-size: 1.6rem;
+        }
+
+        .form-section h2 {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="registro-container">
+    <div class="registro-card">
+        <div class="registro-header">
+            <h1>🌾 Registro de Productor</h1>
+            <p>Completa el formulario para crear tu cuenta</p>
+        </div>
+
+        <div class="registro-body">
+            <form method="post" action="">
+                {% csrf_token %}
+
+                <!-- Información de la Cuenta -->
+                <div class="form-section">
+                    <h2>Información de la Cuenta</h2>
+
+                    <div class="form-group">
+                        <label for="id_username" class="required-field">Usuario</label>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            id="id_username"
+                            placeholder="Usuario"
+                            required
+                            maxlength="150"
+                            value="{{ form.username.value|default:'' }}"
+                        >
+                        <div class="form-help">
+                            Requerido. 150 caracteres o menos. Letras, dígitos y @/+/-/_ solamente.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_email" class="required-field">Correo Electrónico (cuenta)</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="id_email"
+                            placeholder="correo@ejemplo.com"
+                            required
+                            value="{{ form.email.value|default:'' }}"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password1" class="required-field">Contraseña</label>
+                        <input 
+                            type="password" 
+                            name="password1" 
+                            id="id_password1"
+                            placeholder="Contraseña"
+                            required
+                        >
+                        <div class="password-requirements">
+                            <strong>Requisitos de la contraseña:</strong>
+                            <ul>
+                                <li>No puede ser muy similar a tu otra información personal</li>
+                                <li>Debe contener al menos 8 caracteres</li>
+                                <li>No puede ser una contraseña comúnmente usada</li>
+                                <li>No puede ser completamente numérica</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password2" class="required-field">Confirmar Contraseña</label>
+                        <input 
+                            type="password" 
+                            name="password2" 
+                            id="id_password2"
+                            placeholder="Confirmar contraseña"
+                            required
+                        >
+                        <div class="form-help">
+                            Ingresa la misma contraseña para verificación
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información del Productor -->
+                <div class="form-section">
+                    <h2>Información del Productor</h2>
+
+                    <div class="form-group">
+                        <label for="id_nombre" class="required-field">Nombre Completo</label>
+                        <input 
+                            type="text" 
+                            name="nombre" 
+                            id="id_nombre"
+                            placeholder="Nombre completo"
+                            required
+                            value="{{ form.nombre.value|default:'' }}"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_nit" class="required-field">NIT</label>
+                        <input 
+                            type="text" 
+                            name="nit" 
+                            id="id_nit"
+                            placeholder="NIT"
+                            required
+                            value="{{ form.nit.value|default:'' }}"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_direccion" class="required-field">Dirección</label>
+                        <textarea 
+                            name="direccion" 
+                            id="id_direccion"
+                            placeholder="Dirección completa"
+                            required
+                        >{{ form.direccion.value|default:'' }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_telefono" class="required-field">Teléfono</label>
+                        <input 
+                            type="tel" 
+                            name="telefono" 
+                            id="id_telefono"
+                            placeholder="Teléfono"
+                            required
+                            value="{{ form.telefono.value|default:'' }}"
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-registro">
+                    Registrarse
+                </button>
+
+                <div class="login-link">
+                    ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

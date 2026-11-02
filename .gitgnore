@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.py[cod]
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Base de datos
+db.sqlite3
+
+# VS Code
+.vscode/
+
+# Variables de entorno
+.env
