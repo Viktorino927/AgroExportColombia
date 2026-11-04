@@ -117,7 +117,10 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f'¡Bienvenido {user.username}!')
-            next_page = request.GET.get('next', 'home')
+            next_page = request.GET.get('next')
+            allowed_pages = ['home', 'dashboard', 'perfil']
+            if next_page not in allowed_pages:
+            next_page = 'home'
             return redirect(next_page)
         else:
             messages.error(request, 'Usuario o contraseña incorrectos.')

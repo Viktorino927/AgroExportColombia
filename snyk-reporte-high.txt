@@ -1,0 +1,287 @@
+================================================================================
+REPORTE SNYK - AgroExportColombia
+Filtro: solo High y Critical  (--severity-threshold=high)
+================================================================================
+Fecha del scan:     2 de noviembre de 2026
+Comando:            npx snyk test --severity-threshold=high
+Organizacion:       viktorino927
+Gestor de paquetes: pip
+Archivo analizado:  requirements.txt
+Ruta del proyecto:  C:\Users\mauro\AgroExportColombia
+
+--------------------------------------------------------------------------------
+RESUMEN
+--------------------------------------------------------------------------------
+Dependencias analizadas:  57
+Issues High/Critical:     69
+Rutas vulnerables:        109
+
+Este reporte excluye Medium y Low. El scan completo (120 issues)
+esta en snyk-reporte.txt.
+
+Paquetes a actualizar (9):
+  - certifi      2025.1.31  ->  2026.10.18
+  - django       5.2.8      ->  5.2.17
+  - dnspython    2.8.0      ->  2.9.0
+  - h11          0.14.0     ->  0.16.0
+  - lxml         6.0.0      ->  6.1.0
+  - pillow       12.0.0     ->  13.0.0
+  - soupsieve    2.6        ->  2.8.4
+  - sqlparse     0.5.3      ->  0.6.0
+  - urllib3      2.3.0      ->  2.8.0
+
+Conteo por paquete (High + Critical):
+  certifi      1 Critical
+  django       2 Critical, 5 High
+  dnspython    1 High
+  h11          1 Critical
+  lxml         1 High
+  pillow       6 Critical, 38 High
+  soupsieve    2 High
+  sqlparse     1 Critical, 4 High  (+ 1 High sin parche)
+  urllib3      6 High
+
+Prioridad sugerida:
+  1. Django 5.2.8 -> 5.2.17      SQL Injection Critical/High
+  2. Pillow 12.0.0 -> 13.0.0     Heap buffer overflow Critical
+  3. sqlparse 0.5.3 -> 0.6.0     Arbitrary Code Injection Critical
+  4. h11 0.14.0 -> 0.16.0        HTTP Request Smuggling Critical
+  5. certifi 2025.1.31 -> 2026.10.18
+  6. urllib3, lxml, soupsieve, dnspython
+
+Nota: en el scan completo Snyk pedia Django 5.2.18. Con el filtro
+High/Critical el upgrade minimo indicado es 5.2.17.
+
+================================================================================
+1. CERTIFI  2025.1.31  ->  2026.10.18
+================================================================================
+CRITICAL
+  - Improper Certificate Validation (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-CERTIFI-21280764
+    Introducido por: certifi@2025.1.31 y 3 rutas mas
+
+================================================================================
+2. DJANGO  5.2.8  ->  5.2.17
+================================================================================
+CRITICAL
+  - SQL Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-15198931
+  - SQL Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-15198932
+
+HIGH
+  - Inefficient Algorithmic Complexity
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-14157807
+  - SQL Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-14157810
+  - SQL Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-15183335
+  - External Control of File Name or Path
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-18532925
+  - Uncontrolled Recursion
+    https://security.snyk.io/vuln/SNYK-PYTHON-DJANGO-18532953
+
+================================================================================
+3. DNSPYTHON  2.8.0  ->  2.9.0
+================================================================================
+HIGH
+  - Uncontrolled Recursion (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-DNSPYTHON-21433565
+    Introducido por: dnspython@2.8.0 y 1 ruta mas
+
+================================================================================
+4. H11  0.14.0  ->  0.16.0
+================================================================================
+CRITICAL
+  - HTTP Request Smuggling
+    https://security.snyk.io/vuln/SNYK-PYTHON-H11-10293728
+    Introducido por: h11@0.14.0 y 3 rutas mas
+
+================================================================================
+5. LXML  6.0.0  ->  6.1.0
+================================================================================
+HIGH
+  - XML External Entity (XXE) Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-LXML-16119103
+    Introducido por: lxml@6.0.0 y 7 rutas mas
+
+================================================================================
+6. PILLOW  12.0.0  ->  13.0.0
+================================================================================
+CRITICAL
+  - Heap-based Buffer Overflow (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277783
+  - Heap-based Buffer Overflow (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277801
+  - Heap-based Buffer Overflow (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277802
+  - Heap-based Buffer Overflow (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21279300
+  - Out-of-bounds Write (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21431493
+  - Out-of-bounds Write (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21460715
+
+HIGH
+  - Out-of-bounds Write
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-15265439
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-16032068
+  - Out-of-bounds Write
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-16419303
+  - Memory Allocation with Excessive Size Value
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17824465
+  - Memory Allocation with Excessive Size Value
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17824466
+  - Memory Allocation with Excessive Size Value
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17824468
+  - Memory Allocation with Excessive Size Value
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17824469
+  - Out-of-bounds Write
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17972376
+  - Out-of-bounds Read
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17972377
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17972384
+  - Out-of-bounds Write
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-17972386
+  - Argument Injection (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277713
+  - Inefficient Algorithmic Complexity (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277726
+  - Uncontrolled Recursion (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277727
+  - Use of Uninitialized Resource (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277734
+  - Memory Allocation with Excessive Size Value (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277779
+  - Allocation of Resources Without Limits or Throttling (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277780
+  - NULL Pointer Dereference (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277781
+  - Buffer Over-read (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277782
+  - Use After Free (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277784
+  - Infinite loop (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277785
+  - Out-of-bounds Write (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277786
+  - Improper Handling of Highly Compressed Data (Data Amplification) (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277787
+  - Out-of-bounds Read (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277793
+  - Use of Uninitialized Variable (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277794
+  - Infinite loop (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277795
+  - NULL Pointer Dereference (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277799
+  - Use After Free (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21277800
+  - Function Call With Incorrect Argument Type (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430900
+  - Out-of-bounds Read (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430916
+  - Infinite loop (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430917
+  - Improper Handling of Highly Compressed Data (Data Amplification) (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430991
+  - Unchecked Input for Loop Condition (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430998
+  - Improper Handling of Highly Compressed Data (Data Amplification) (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21430999
+  - Out-of-bounds Write (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21431000
+  - Integer Overflow or Wraparound (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21431005
+  - Allocation of Resources Without Limits or Throttling (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21431018
+  - Improper Handling of Highly Compressed Data (Data Amplification) (new)
+    https://security.snyk.io/vuln/SNYK-PYTHON-PILLOW-21431022
+
+================================================================================
+7. SOUPSIEVE  2.6  ->  2.8.4
+================================================================================
+HIGH
+  - Regular Expression Denial of Service (ReDoS)
+    https://security.snyk.io/vuln/SNYK-PYTHON-SOUPSIEVE-17911084
+    Introducido por: soupsieve@2.6 y 1 ruta mas
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-SOUPSIEVE-17911087
+    Introducido por: soupsieve@2.6 y 1 ruta mas
+
+================================================================================
+8. SQLPARSE  0.5.3  ->  0.6.0
+================================================================================
+CRITICAL
+  - Arbitrary Code Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-18905644
+    Introducido por: sqlparse@0.5.3 y 1 ruta mas
+
+HIGH
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-14157217
+  - Denial of Service (DoS)
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-18905009
+  - Regular Expression Denial of Service (ReDoS)
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-18905413
+  - Regular Expression Denial of Service (ReDoS)
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-18905471
+
+--------------------------------------------------------------------------------
+SIN UPGRADE NI PARCHE DIRECTO
+--------------------------------------------------------------------------------
+HIGH
+  - Arbitrary Code Injection
+    https://security.snyk.io/vuln/SNYK-PYTHON-SQLPARSE-21248801
+    Introducido por: sqlparse@0.5.3 y 1 ruta mas
+    Nota: Snyk no ofrece upgrade ni parche para este issue.
+          El upgrade a 0.6.0 cubre el resto de sqlparse.
+
+================================================================================
+9. URLLIB3  2.3.0  ->  2.8.0
+================================================================================
+HIGH
+  - Improper Handling of Highly Compressed Data (Data Amplification)
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-14192442
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-14192443
+  - Improper Handling of Highly Compressed Data (Data Amplification)
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-14896210
+  - Insertion of Sensitive Information Into Sent Data
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-16642024
+  - Improper Certificate Validation
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-20302844
+  - Allocation of Resources Without Limits or Throttling
+    https://security.snyk.io/vuln/SNYK-PYTHON-URLLIB3-20302846
+
+    Todas las de urllib3: introducidas por urllib3@2.3.0 y 3 rutas mas.
+
+================================================================================
+COMANDOS PARA APLICAR LOS UPGRADES (High/Critical)
+================================================================================
+Con el venv activado (.venv):
+
+  pip install --upgrade ^
+    "certifi==2026.10.18" ^
+    "Django==5.2.17" ^
+    "dnspython==2.9.0" ^
+    "h11==0.16.0" ^
+    "lxml==6.1.0" ^
+    "pillow==13.0.0" ^
+    "soupsieve==2.8.4" ^
+    "sqlparse==0.6.0" ^
+    "urllib3==2.8.0"
+
+Luego regenerar requirements y volver a escanear:
+
+  pip freeze > requirements.txt
+  npx snyk test --severity-threshold=high
+
+Si se quiere cubrir tambien Medium/Low de Django, usar 5.2.18
+(como indica snyk-reporte.txt).
+
+================================================================================
+FIN DEL REPORTE
+================================================================================

@@ -7,13 +7,13 @@ certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
 colorama==0.4.6
-Django==5.2.8
+Django==5.2.18
 dnspython==2.8.0
 docxcompose==1.4.0
 docxtpl==0.20.1
 email-validator==2.3.0
 et_xmlfile==2.0.0
-h11==0.14.0
+h11==0.16.0
 idna==3.10
 inquirerpy==0.3.4
 Jinja2==3.1.6
